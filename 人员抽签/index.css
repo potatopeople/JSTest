@@ -1,0 +1,67 @@
+main{
+  width: 860px;
+  margin: 50px auto;
+}
+.people-box ul{
+  margin-left: -25px;
+  margin-top: -25px;
+  width: 100%;
+  list-style: none;
+  flex-wrap: wrap;
+  display: flex;
+  padding: 0;
+}
+.people-box li{
+  color: rgb(88, 85, 85);
+  min-width: 50px;
+  padding: 5px;
+  border: 1px solid rgb(194, 80, 80);
+  text-align: center;
+  margin: 25px 0 0 25px;
+}
+.people-box .active{
+  background: rgb(194, 80, 80);
+  color: white;
+}
+.input-box{
+  margin-top: 100px;
+}
+.input-box .contorl{
+  display: flex;
+  position: relative;
+  align-items: baseline;
+}
+.input-box .contorl input{
+  outline: none;
+  padding: 5px;
+  color: rgb(230, 119, 119);
+}
+.input-box .contorl .btn{
+  padding: 4.6px 10px;
+  top: -1px;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute;
+  display: inline-block;
+  user-select: none;
+}
+.sure{
+  color: white;
+  left: 300px;
+  background: rgb(190, 57, 57);
+  border: 1px solid rgb(231, 22, 22);
+}
+.reset{
+  left: 360px;
+  color: white;
+  background: rgb(11, 78, 202);
+  border: 1px solid rgb(52, 133, 226);
+}
+.input-box .contorl .reset:active{
+  background: rgb(27, 89, 204);
+  border: 1px solid rgb(15, 110, 218);
+}
+.input-box .contorl .sure:active{
+  border: 1px solid rgb(156, 8, 8);
+  background: rgb(192, 36, 36);
+}
