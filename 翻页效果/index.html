@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>翻页</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div id="my3dspace">
+    <div id="pagegroup">
+      <div class="page" id="page1">1</div>
+      <div class="page" id="page2">2</div>
+      <div class="page" id="page3">3</div>
+      <div class="page" id="page4">4</div>
+      <div class="page" id="page5">5</div>
+      <div class="page" id="page6">6</div>
+    </div>
+  </div>
+  <div id="op">
+    <a href="javascript:next()">下一页&nbsp;</a>
+    <a href="javascript:prev()">上一页</a>
+  </div>
+</body>
+<script>
+  let curIndex = 1;
+  function next() {
+    if (curIndex === 6) {
+      return 0
+    }
+    let curPage = document.getElementById('page' + curIndex);
+    curPage.setAttribute('class', 'page cur')
+    curIndex++
+    let nextPage = document.getElementById('page' + curIndex)
+    nextPage.setAttribute('class', 'page next')
+  }
+  function prev() {
+    if (curIndex === 1) {
+      return 0
+    }
+    let curPage = document.getElementById('page' + curIndex);
+    curPage.setAttribute('class', 'page prev')
+    curIndex--
+    let nextPage = document.getElementById('page' + curIndex)
+    nextPage.setAttribute('class', 'page next')
+  }
+</script>
+
+</html>
