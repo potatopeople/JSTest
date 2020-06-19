@@ -11,12 +11,29 @@
       }
       peopleWarpper.appendChild(ulDom)
     }
-    valueVerify() { //人数验证
+    valueVerify() { //输入验证
       const peopleCount = peopleNumInput.value
-      if (peopleCount) {
-        return true
-      } else {
+      if(peopleNumArr.length) {
+        peopleNumInput.value = ''
+        peopleNumInput.setAttribute('placeholder', '请点击重置按钮')
         return false
+      } else {
+        if (peopleCount) {
+          if(peopleCount > peopleList.length) {
+            peopleNumInput.value = ''
+            peopleNumInput.setAttribute('placeholder', '抽签人数过多')
+            return false
+          } else if(peopleCount <= 0) {
+            peopleNumInput.value = ''
+            peopleNumInput.setAttribute('placeholder', '人数错误')
+            return false
+          } else {
+            return true
+          }
+        } else {
+          peopleNumInput.value = ''
+          peopleNumInput.setAttribute('placeholder', '请输入抽签人数')
+        }
       }
     }
     startChosePeopleHandle() { // 确定抽出人员
@@ -53,16 +70,8 @@
       })
     }
     clickSureBtnHandle() { // 点击确定按钮
-      if(peopleNumArr.length) {
-        peopleNumInput.value = ''
-        peopleNumInput.setAttribute('placeholder', '请点击重置按钮')
-      } else {
-        if (this.valueVerify()) {
-          this.startChosePeopleHandle()
-        } else {
-          peopleNumInput.value = ''
-          peopleNumInput.setAttribute('placeholder', '请输入抽签人数')
-        }
+      if(this.valueVerify()){
+        this.startChosePeopleHandle()
       }
     }
     clickResetBtnHandle(){ // 点击重置按钮
@@ -71,7 +80,7 @@
       }
     }
   }
-  const peopleList = ['缑鑫', '刘国策', '张洪纲', '欧磊', '刘茂盛', '李宏恩', '谢帅', '米雪函', '王浩', '王绍波', '张国华', '米思源', '王子文', '郑高超', '李德林', '梁欣雨', '旷青鹏', '李秋玲', '缑繁', '陈东', '陈朝辉', '黄罗川', '']
+  const peopleList = ['缑鑫', '刘国策', '张洪纲', '欧磊', '刘茂盛', '李宏恩', '谢帅', '米雪函', '王浩', '王绍波', '张国华', '米思源', '王子文', '郑高超', '李德林', '梁欣雨', '旷青鹏', '李秋玲', '缑繁', '陈东', '陈朝辉', '黄罗川']
   //人员列表盒子
   const peopleWarpper = document.getElementsByClassName('people-box')[0]
   //人员列表
