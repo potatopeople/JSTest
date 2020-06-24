@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>日期选择器</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+  <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+  <div class="date-box animate__animated animate__fadeInDown"></div>
+</body>
+<!--引入日期类-->
+<script src="./index.js"></script>
+<script>
+  window.addEventListener('load', webLoadEndHandle)
+  function webLoadEndHandle() {
+    //日期元素外层盒子
+    const dateBox = document.getElementsByClassName('date-box')[0]
+    //初始化实例,需要传入日期元素盒子和一个初始化时间
+    const dateFn = new DateReterFace(dateBox,new Date())
+    //按钮外层元素
+    const btnBox = document.getElementsByClassName('date-btn')[0]
+    //确定按钮
+    const sureBtn = btnBox.getElementsByTagName('span')[0]
+    //取消按钮
+    const noBtn = btnBox.getElementsByTagName('span')[1]
+    sureBtn.addEventListener('click',sureBtnClickHandle)
+    noBtn.addEventListener('click',noBtnClickHandle)
+
+    //确定点击事件
+    function sureBtnClickHandle(){
+      /*
+      **dateFn.year:年
+      **dateFn.month+1:月
+      **dateFn.day:日
+      */
+     dateFn.controlBoxShow() //不传或传false为隐藏盒子，传入true即为显示盒子
+      // alert(dateFn.year+'年'+(dateFn.month+1)+'月'+dateFn.day+'')
+    }
+    //取消点击事件
+    function noBtnClickHandle(){
+      dateFn.controlBoxShow()
+    }
+  }
+</script>
+
+</html>
