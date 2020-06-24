@@ -83,7 +83,7 @@ class DateReterFace {
         ] // 星期数据
         this.dateInitHandle(true)
       } else {
-        throw('日期格式错误：格式应为：'+new Date().toString())
+        throw ('日期格式错误：格式应为：' + new Date().toString())
       }
     } catch (err) {
       alert(err)
@@ -146,7 +146,7 @@ class DateReterFace {
     return date
   }
   _dateClickHandle(e) { //点击日期处理
-    const index = e.getAttribute('data-index') || 30
+    const index = e.target.getAttribute('data-index') || 30
     const { year = '', month = '', value = '', tf = false } = this.date[index]
     if (tf) {
       this._clickStyleHandle(index)
@@ -169,6 +169,12 @@ class DateReterFace {
       }
     })
   }
+  _yearClickHandle(e){ //点击年份处理
+    console.log(this.year)
+  }
+  _monthClickHandle(e){ //点击月份处理
+    console.log(this.month)
+  }
   _dateDomHandle() { // 渲染DOM
     const headerHTML = this._headerDom()
     const middleHTML = this._middleDom()
@@ -176,10 +182,14 @@ class DateReterFace {
     const btnHTML = this._btnDom()
     this.dateBox.innerHTML = headerHTML + middleHTML + bottomHTML + btnHTML
   }
-  _clickEventHandle(){ //点击事件处理
-    this.dateBox.getElementsByClassName('bottom')[0].addEventListener('click', (e) => {
-      this._dateClickHandle(e.target)
-    })
+  _clickEventHandle() { //点击事件处理
+    //日期点击
+    this.dateBox.getElementsByClassName('bottom')[0].addEventListener('click', this._dateClickHandle.bind(this))
+    const headerDom = this.dateBox.getElementsByClassName('header')[0]
+    //年点击
+    headerDom.getElementsByTagName('span')[0].addEventListener('click', this._yearClickHandle.bind(this))
+    //月点击
+    headerDom.getElementsByTagName('span')[1].addEventListener('click', this._monthClickHandle.bind(this))
   }
   _headerDom() { // header HTML
     const headerHTML = `
@@ -226,16 +236,11 @@ class DateReterFace {
     return btnHTML
   }
   controlBoxShow(tf = false) { // 不传或传false为隐藏盒子，传true即为显示盒子
-    // this.dateBox.style.display = tf ? 'inline-block' : 'none'
-    if(tf){
-      this.dateBox.setAttribute('class','date-box animate__animated animate__fadeInDown')
+    if (tf) {
+      this.dateBox.setAttribute('class', 'date-box animate__animated animate__fadeInDown')
     } else {
-      this.dateBox.setAttribute('class','date-box animate__animated animate__fadeOutUp')
+      this.dateBox.setAttribute('class', 'date-box animate__animated animate__fadeOutUp')
     }
-    
-    // if(!tf){
-
-    // }
   }
   dateInitHandle(tf = false) { // 日期初始化
     const currentDate = this._getMonthDay(tf)
