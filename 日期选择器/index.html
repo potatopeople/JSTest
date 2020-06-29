@@ -9,40 +9,40 @@
   <link rel="stylesheet" href="./index.css">
 </head>
 
-<body>
-  <div class="date-box animate__animated animate__fadeInDown"></div>
+<body style="display: flex;flex-direction: column;">
+  
+  <button style="font-size:18px">选择日期</button>
+  <button style="font-size:18px">隐藏</button>
+  <input style="font-size:18px;text-align:center;" id="date-text" />
+  <div class="date-box"></div>
 </body>
-<!--引入日期类-->
+<!--引入日期文件-->
 <script src="./index.js"></script>
 <script>
   window.addEventListener('load', webLoadEndHandle)
   function webLoadEndHandle() {
+
+    document.getElementsByTagName('button')[0].onclick = choseDateHandle
+    document.getElementsByTagName('button')[1].onclick = noDateBox
+
+    //存放日期的容器
+    const contentBox = document.getElementById('date-text')
     //日期元素外层盒子
     const dateBox = document.getElementsByClassName('date-box')[0]
-    //初始化实例,需要传入日期元素盒子和一个初始化时间
-    const dateFn = new DateReterFace(dateBox,new Date())
-    //按钮外层元素
-    const btnBox = document.getElementsByClassName('date-btn')[0]
-    //确定按钮
-    const sureBtn = btnBox.getElementsByTagName('span')[0]
-    //取消按钮
-    const noBtn = btnBox.getElementsByTagName('span')[1]
-    sureBtn.addEventListener('click',sureBtnClickHandle)
-    noBtn.addEventListener('click',noBtnClickHandle)
 
-    //确定点击事件
-    function sureBtnClickHandle(){
-      /*
-      **dateFn.year:年
-      **dateFn.month+1:月
-      **dateFn.day:日
-      */
-     dateFn.controlBoxShow() //不传或传false为隐藏盒子，传入true即为显示盒子
-      // alert(dateFn.year+'年'+(dateFn.month+1)+'月'+dateFn.day+'')
+    /*
+    **初始化实例,需要传入：存放日期的容器，日期元素盒子，一个初始化时间，点击确定和取消按钮后是否要隐藏(默认为否)
+    **选择时间后，可以通过dateFn.year，dateFn.month + 1，dateFn.day 拿到年月日时间
+    */
+    const dateFn = new DateReterFace(contentBox,dateBox,new Date(),true)
+
+    //手动调用显示，按自己需求来决定是否需要
+    function choseDateHandle() {
+      dateFn.controlBoxShow(true) //显示
     }
-    //取消点击事件
-    function noBtnClickHandle(){
-      dateFn.controlBoxShow()
+    //手动调用隐藏，按自己需求来决定是否需要
+    function noDateBox(){
+      dateFn.controlBoxShow() //隐藏
     }
   }
 </script>
